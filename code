@@ -1,0 +1,25 @@
+def crypt():
+    so = input("Enter secret number: ")
+    old_dic = {chr(i): i - (int(so))for i in range(ord("A"), ord("A") + 26)}
+    inp = str(input("Cryptify: ")).upper()
+    for key,value in old_dic.items():
+        if len(inp) >= 1:
+            bit = list(inp)
+            spell = list(map(old_dic.get, bit))
+            spell = spell[::-1]            
+            print(*spell, "")
+            break
+        else:
+            print("Improper input.")
+            break 
+    
+ def decrypt():
+    so1 = input("Enter secret number: ")
+    new_dic = {i - (int(so1)):chr(i) for i in range(ord("A"), ord("A") + 26)}
+    inp2 = list(map(int,(input("Decryptify: ").strip().split())))
+    if len(inp2) >= 1:
+        spell2 = list(map(new_dic.get, inp2))
+        spell2 = spell2[::-1]
+        print(spell2)
+    else:
+        print("Improper input.")
