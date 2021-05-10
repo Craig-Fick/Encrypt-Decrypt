@@ -43,14 +43,21 @@ def ecopn():
     main.clipboard_append(nu1.get())
 
 def dpasten():
-        ClipBoard = main.clipboard_get()
-        nu3.insert(0,ClipBoard)
+    ClipBoard = main.clipboard_get()
+    nu3.insert(0,ClipBoard)
 
 def dpasten2():
-        ClipBoard = main.clipboard_get()
-        nu4.insert(0,ClipBoard)        
+    ClipBoard = main.clipboard_get()
+    nu4.insert(0,ClipBoard)        
         
-    
+def removeValue():
+    nu1.delete(0, END)
+    nu2.delete(0, END)
+    nu3.delete(0, END)
+    nu4.delete(0, END)
+    blank4.delete(0, END)
+    blank5.delete(0, END)
+       
 
 main = Tk()
 main.geometry("900x300")
@@ -90,6 +97,6 @@ Button(main, text='Show', command=decrypt).grid(row=7, column=2, sticky=W, pady=
 Button(main, text='Copy Message', command=dcop ).grid(row=8, column=1, sticky = W, pady=4)
 Button(main, text='Quit', command=main.destroy).grid(row=8, column=2, sticky=W, pady=4)
 Button(main, text='Paste', command=dpasten2).grid(row=6, column=2, sticky = W, pady=4)
-
+Button(main, text="Clear", command=removeValue).grid(row=9, column=1, sticky = W, pady=4)
 
 mainloop()
