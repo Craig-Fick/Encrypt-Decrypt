@@ -65,7 +65,7 @@ main.configure(bg='light green')
 main.title("Encryption Tool")
 
 Label(main, text = "Enter secret number:").grid(row=0)
-Label(main, text = "Cryptify:").grid(row=1)
+Label(main, text = "Cryptify (no numbers, spaces, or punctuation):").grid(row=1)
 Label(main, text = "Encrypted output:").grid(row=2)
 
 Button(main, text='Copy', command=ecopn).grid(row=0, column=2, sticky = W, pady=4)
