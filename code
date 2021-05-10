@@ -1,25 +1,95 @@
+from tkinter import *
+import tkinter.messagebox
+
+
 def crypt():
-    so = input("Enter secret number: ")
-    old_dic = {chr(i): i - (int(so))for i in range(ord("A"), ord("A") + 26)}
-    inp = str(input("Cryptify: ")).upper()
-    for key,value in old_dic.items():
-        if len(inp) >= 1:
-            bit = list(inp)
-            spell = list(map(old_dic.get, bit))
-            spell = spell[::-1]            
-            print(*spell, "")
-            break
-        else:
-            print("Improper input.")
-            break 
+    so = int(nu1.get())
+    inp = str(nu2.get().upper())
+    old_dic = {chr(i): i * (int(so)+int(so))for i in range(ord("A"), ord("A") + 26)}   
+    if len(inp) >= 1:
+        bit = list(inp)
+        spell = list(map(old_dic.get, bit))
+        spell = spell[::-1]            
+        ans1 = (*map(str,spell), "")
+        blank4.insert(0, ' '.join(ans1)) 
+        
+    else:
+        print("Improper input.")
+        
     
- def decrypt():
-    so1 = input("Enter secret number: ")
-    new_dic = {i - (int(so1)):chr(i) for i in range(ord("A"), ord("A") + 26)}
-    inp2 = list(map(int,(input("Decryptify: ").strip().split())))
+def decrypt():
+    so1 = int(nu3.get())
+    new_dic = {i * (int(so1)+int(so1)):chr(i) for i in range(ord("A"), ord("A") + 26)}
+    inp2 = nu4.get()
+    inp2 = list(map(int,(inp2.strip().split())))
     if len(inp2) >= 1:
         spell2 = list(map(new_dic.get, inp2))
         spell2 = spell2[::-1]
-        print(spell2)
+        ans2 = (*map(str, spell2), "")
+        blank5.insert(0, ans2)
     else:
         print("Improper input.")
+        
+def ecop():
+    main.clipboard_clear()
+    main.clipboard_append(blank4.get())
+    
+def dcop():
+    main.clipboard_clear()
+    main.clipboard_append(blank5.get())
+
+def ecopn():
+    main.clipboard_clear()
+    main.clipboard_append(nu1.get())
+
+def dpasten():
+        ClipBoard = main.clipboard_get()
+        nu3.insert(0,ClipBoard)
+
+def dpasten2():
+        ClipBoard = main.clipboard_get()
+        nu4.insert(0,ClipBoard)        
+        
+    
+
+main = Tk()
+main.geometry("900x300")
+main.configure(bg='light green')
+main.title("Encryption Tool")
+
+Label(main, text = "Enter secret number:").grid(row=0)
+Label(main, text = "Cryptify:").grid(row=1)
+Label(main, text = "Encrypted output:").grid(row=2)
+
+Button(main, text='Copy', command=ecopn).grid(row=0, column=2, sticky = W, pady=4)
+Button(main, text='Show', command=crypt).grid(row=1, column=2, sticky=W, pady=4)
+Button(main, text='Copy', command=ecop ).grid(row=2, column=2, sticky = W, pady=4)
+
+nu1 = Entry(main, width = 90)
+nu2 = Entry(main, width = 90)
+blank4 = Entry(main, width = 90)
+
+
+Label(main, text = "Enter secret number:").grid(row=5)
+Label(main, text = "Decryptify:").grid(row=6)
+Label(main, text = "Decrypted output:").grid(row=7)
+
+nu3 = Entry(main, width = 90)
+nu4 = Entry(main, width = 90)
+blank5 = Entry(main, width = 90)              
+           
+nu1.grid(row=0, column=1)
+nu2.grid(row=1, column=1)
+blank4.grid(row=2, column=1)
+nu3.grid(row=5, column=1)
+nu4.grid(row=6, column=1)
+blank5.grid(row=7, column=1)
+
+Button(main, text='Paste', command=dpasten).grid(row=5, column=2, sticky = W, pady=4)
+Button(main, text='Show', command=decrypt).grid(row=7, column=2, sticky=W, pady=4)
+Button(main, text='Copy Message', command=dcop ).grid(row=8, column=1, sticky = W, pady=4)
+Button(main, text='Quit', command=main.destroy).grid(row=8, column=2, sticky=W, pady=4)
+Button(main, text='Paste', command=dpasten2).grid(row=6, column=2, sticky = W, pady=4)
+
+
+mainloop()
